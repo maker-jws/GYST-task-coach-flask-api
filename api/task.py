@@ -37,7 +37,7 @@ def update_task(id):
 	query = models.Task.update(**payload).where(models.Task.id == id)
 	query.execute()
 	updated_task = models.Task.get_by_id(id)
-	return jsonify(data=model_to_dict(updates_task), status={"code": 201, "message": "Success"})
+	return jsonify(data=model_to_dict(updated_task), status={"code": 201, "message": "Success"})
 
 #DELETE A TASK
 @task.route("/<id>", methods=["Delete"])

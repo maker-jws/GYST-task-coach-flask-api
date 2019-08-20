@@ -4,6 +4,8 @@ from api.user import user
 from flask import Flask, g
 from flask_login import LoginManager
 import models
+from api.task import task
+
 
 DEBUG = True
 PORT = 8000
@@ -40,6 +42,8 @@ def after_request(response):
     g.db.close()
     return response
 
+app.register_blueprint(task)
+
 # The default URL ends in / ("my-website.com/").
 @app.route('/')
 def index():
@@ -49,4 +53,5 @@ def index():
 # Run the app when the program starts!
 if __name__ == '__main__':
     models.initialize()
+
     app.run(debug=DEBUG, port=PORT)

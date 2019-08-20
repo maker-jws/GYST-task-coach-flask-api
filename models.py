@@ -4,8 +4,7 @@ import datetime  # python module to help deal with dates
 
 DATABASE = SqliteDatabase('tasks.sqlite')
 
-
-class User(UserMixin, Model):
+class User(Model):
     username = CharField(unique=True)
     email = CharField(unique=True)
     password = CharField()
