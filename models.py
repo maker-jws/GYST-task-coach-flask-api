@@ -9,8 +9,8 @@ class User(UserMixin, Model):
     username = CharField(unique=True)
     email = CharField(unique=True)
     password = CharField()
-    login = DateTimeField()
-    logout = DateTimeField()
+    login = DateTimeField(default=datetime.datetime.now)
+    logout = DateTimeField(default=datetime.datetime.now)
     user = IntegerField()
 
     class Meta:
@@ -22,7 +22,7 @@ class Task(Model):
     taskname = CharField()
     priority = CharField()
     saved = BooleanField(default=False)
-    created = DateTimeField()
+    created = DateTimeField(default=datetime.datetime.now)
     body = CharField()
     user_id = IntegerField()
     completed = BooleanField(default=False)
