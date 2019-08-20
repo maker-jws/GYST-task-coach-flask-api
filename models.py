@@ -1,6 +1,6 @@
 from peewee import *
 from flask_login import UserMixin
-import datetime # python module to help deal with dates
+import datetime  # python module to help deal with dates
 
 DATABASE = SqliteDatabase('tasks.sqlite')
 
@@ -11,7 +11,7 @@ class User(UserMixin, Model):
     password = CharField()
     login = DateTimeField(default=datetime.datetime.now)
     logout = DateTimeField(default=datetime.datetime.now)
-    user = IntegerField()
+
 
     class Meta:
         # //should create primarykey?
