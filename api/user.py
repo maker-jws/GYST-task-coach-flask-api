@@ -40,7 +40,7 @@ def register_user():
         payload['password'] = generate_password_hash(payload['password'])
         user = models.User.create(**payload)
 
-        # login_user(user)
+        login_user(user)
 
         user_dict = model_to_dict(user)
         del user_dict['password']
