@@ -2,15 +2,28 @@
 
 from api.user import user
 from flask import Flask, g
+from flask_login import LoginManager
 import models
 
 DEBUG = True
 PORT = 8000
 
+login_manager = LoginManager()
 
 # Initialize an instance of the Flask class.
 # This starts the website!
 app = Flask(__name__)
+app.secret_key = 'supercalifragilisticexpialidocius'
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(userid):
+    try:
+        return models.User.get(models.user.id == userid)
+    except models.DoesNotExist:
+        return None
+
 
 # register blueprints here
 app.register_blueprint(user)
