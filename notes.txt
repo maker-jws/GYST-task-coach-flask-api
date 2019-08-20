@@ -1,0 +1,15 @@
+MODELS
+USER
+    username = CharField(unique=True)
+    email = CharField(unique=True)
+    password = CharField()
+    login = DateTimeField()
+    logout = DateTimeField()
+    user = IntegerField()
+TASK
+    taskname = CharField()
+    priority = CharField()
+    saved = BooleanField(default=False)
+    created = DateTimeField()
+    body = CharField()
+    user_id = IntegerField()
