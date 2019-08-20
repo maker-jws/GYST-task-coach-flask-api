@@ -1,5 +1,6 @@
 from peewee import *
 from flask_login import UserMixin
+import datetime # python module to help deal with dates
 
 DATABASE = SqliteDatabase('tasks.sqlite')
 
@@ -24,6 +25,7 @@ class Task(Model):
     created = DateTimeField()
     body = CharField()
     user_id = IntegerField()
+    completed = BooleanField(default=False)
 
     class Meta:
         database = DATABASE
