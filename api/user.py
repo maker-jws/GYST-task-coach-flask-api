@@ -53,6 +53,12 @@ def show_a_profile(id):
     return jsonify(data=model_to_dict(user), status={'code': 200, 'message': 'Success'})
 
 # Edit route
-
+@user.route('/<id>', methods=['PUT'])
+def edit_profile(id):
+    payload = request.get_json()
+    query = models.User.update(**payload).where(models.User.id == id)
+    query.execute()
+    updateUser = models.User.get_by_id(id)
+    return jsonify(data=model_to_dict(updateUser), status={'code': 200, 'message': 'Success'})
 
 # Delete route
