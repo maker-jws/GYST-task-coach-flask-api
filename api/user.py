@@ -21,6 +21,7 @@ from playhouse.shortcuts import model_to_dict
 
 user = Blueprint('users', 'user', url_prefix='/user')
 
+# @user.route('/login', methods=['POST'])
 
 # register route
 @user.route('/register', methods=['POST'])
