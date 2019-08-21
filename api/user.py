@@ -45,3 +45,14 @@ def register_user():
         user_dict = model_to_dict(user)
         del user_dict['password']
         return jsonify(data={}, status={'code': 200, 'message': 'Success'})
+
+# Show route
+@user.route('/<id>', methods=['GET'])
+def show_a_profile(id):
+    user = models.User.get_by_id(id)
+    return jsonify(data=model_to_dict(user), status={'code': 200, 'message': 'Success'})
+
+# Edit route
+
+
+# Delete route
