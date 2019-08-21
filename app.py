@@ -1,8 +1,9 @@
-# import blueprints here:
+# imports here:
 
 from api.user import user
-from flask import Flask, g
+from flask import Flask, g, session
 from flask_login import LoginManager
+from flask_cors import CORS
 import models
 from api.task import task
 
@@ -27,7 +28,11 @@ def load_user(userid):
         return None
 
 
+CORS(task, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
+
 # register blueprints here
+app.register_blueprint(task)
 app.register_blueprint(user)
 
 
@@ -42,16 +47,31 @@ def after_request(response):
     g.db.close()
     return response
 
+
 app.register_blueprint(task)
 
 # The default URL ends in / ("my-website.com/").
 @app.route('/')
 def index():
+    session['user'] = 'Tina'
     return 'hi'
+
+# this will be login route
+@app.route('/login')
+def getsession():
+    if 'user' in session:
+        return session['user']
+    return 'not logged in!'
+
+# this will be logout route
+@app.route('/logout')
+def dropsession():
+    # session.pop('user', None)
+    session.clear()
+    return 'Dropped!'
 
 
 # Run the app when the program starts!
 if __name__ == '__main__':
     models.initialize()
-
     app.run(debug=DEBUG, port=PORT)
