@@ -13,7 +13,7 @@ from flask import Blueprint, request, jsonify, url_for, send_file
 
 # other modules that we will use
 from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, logout_user
 from playhouse.shortcuts import model_to_dict
 
 # first argument, is the blueprint name
@@ -75,6 +75,12 @@ def login():
             data={},
             status={"code": 401, "message": "Username or Password is incorrect"},
         )
+
+
+@user.route("/logout", methods=["POST"])
+def logout():
+    logout_user()
+    return jsonify(data={}, status={"code": 200, "message": "Success logging out"})
 
 
 # Show route
