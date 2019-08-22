@@ -36,11 +36,16 @@ def get_one_task(id):
 # UPDATING ONE TASK
 @task.route('/<id>', methods=["PUT"])
 def update_task(id):
-    payload = request.get_json()
+    print(request)
+    # payload = request.get_json()
+    payload = request.form.to_dict()
+    print(type(payload))
+    # print(payload.form.to_dict())
+    print(payload, 'line 40, concents of request')
     query = models.Task.update(**payload).where(models.Task.id == id)
     query.execute()
     updated_task = models.Task.get_by_id(id)
-    return jsonify(data=model_to_dict(updated_task), status={"code": 201, "message": "Success"})
+    return jsonify(data=model_to_dict(updated_task), status={"code": 200, "message": "Success"})
 
 # DELETE A TASK
 @task.route("/<id>", methods=["Delete"])
