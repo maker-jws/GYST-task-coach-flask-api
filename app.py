@@ -16,7 +16,7 @@ login_manager = LoginManager()
 # Initialize an instance of the Flask class.
 # This starts the website!
 app = Flask(__name__)
-app.secret_key = 'supercalifragilisticexpialidocius'
+app.secret_key = "supercalifragilisticexpialidocius"
 login_manager.init_app(app)
 
 
@@ -28,8 +28,8 @@ def load_user(userid):
         return None
 
 
-CORS(task, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(task, origins=["http://localhost:3000"], supports_credentials=True)
+CORS(user, origins=["http://localhost:3000"], supports_credentials=True)
 
 # register blueprints here
 app.register_blueprint(task)
@@ -51,27 +51,29 @@ def after_request(response):
 app.register_blueprint(task)
 
 # The default URL ends in / ("my-website.com/").
-@app.route('/')
+@app.route("/")
 def index():
-    session['user'] = 'Tina'
-    return 'hi'
+    session["user"] = "Tina"
+    return "hi"
+
 
 # this will be login route
-@app.route('/login')
+@app.route("/user/login")
 def getsession():
-    if 'user' in session:
-        return session['user']
-    return 'not logged in!'
+    if "user" in session:
+        return session["user"]
+    return "not logged in!"
+
 
 # this will be logout route
-@app.route('/logout')
+@app.route("/user/logout")
 def dropsession():
     # session.pop('user', None)
     session.clear()
-    return 'Dropped!'
+    return "Dropped!"
 
 
 # Run the app when the program starts!
-if __name__ == '__main__':
+if __name__ == "__main__":
     models.initialize()
     app.run(debug=DEBUG, port=PORT)
