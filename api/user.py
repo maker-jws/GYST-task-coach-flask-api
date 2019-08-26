@@ -37,7 +37,8 @@ def register_user():
 
         return jsonify(
             data={},
-            status={"code": 401, "message": "A user with that email already exists!"},
+            status={"code": 401,
+                    "message": "A user with that email already exists!"},
         )
 
     except models.DoesNotExist:
@@ -49,7 +50,7 @@ def register_user():
 
         user_dict = model_to_dict(user)
         del user_dict["password"]
-        return jsonify(data={}, status={"code": 200, "message": "Success"})
+        return jsonify(data=user_dict, status={"code": 200, "message": "Success"})
 
 
 @user.route("/login", methods=["GET", "POST"])
@@ -68,7 +69,8 @@ def login():
         else:
             return jsonify(
                 data={},
-                status={"code": 401, "message": "username or password is incorrect"},
+                status={"code": 401,
+                        "message": "username or password is incorrect"},
             )
     except models.DoesNotExist:
         return jsonify(

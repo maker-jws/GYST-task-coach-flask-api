@@ -14,7 +14,8 @@ def get_all_tasks():
     except models.DoesNotExist:
         return jsonify(
             data={},
-            status={"code": 401, "message": "There was an error getting the resource"},
+            status={"code": 401,
+                    "message": "There was an error getting the resource"},
         )
 
 
